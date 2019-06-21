@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'DojoReads_app/css/style.css' %}"> 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Trip Info</title>
+
+</head>
+<body class="bg-dark text-light">
+    <div class="container m-5 ">
+        <div class="row m-4 pb-0 align-items-end">
+            <div class="col">
+                <h1>Hello {{request.session.first_name}}! Read about this trip!</h1>
+            </div>
+            <div class="col-2">
+                <h6>
+                    <a href="/dashboard">Dashboard</a>
+                </h6>
+            </div>
+            <div class="col-2">
+                <h6>
+                    <a href = "/logout">Log Out</a>
+                </h6>
+            </div>
+        </div>  
+        <hr class="bg-light">
+
+        <div class="row">
+            <div class="col">
+                <h3>{{trip.destination.name}}</h3>
+                <ul class="list-unstyled border p-3">
+                    <li>Start Date: {{trip.start}}</li>
+                    <li>End Date: {{trip.end}}</li>
+                    <li>Created on: {{trip.created_at}}</li>
+                    <li>Last Updated: {{trip.updated_at}}</li>
+                    <li>Plan: {{trip.plan}}</li>
+                    <li>Created by: {{trip.planner.first_name}}</li>
+          
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h3>People who've joined the trip:</h3>
+                <ul class="list-unstyled">
+                    {% for guest in trip.attendee.all  %}
+                    {% if trip.planner.id != guest.id %}
+                    <li>{{guest.first_name}}</li>
+                    {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+    
+            </div>
+        </div>
+        
+        
+    </div>
+</body>
+</html>

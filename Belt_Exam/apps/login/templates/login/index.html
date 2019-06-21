@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src= 'http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+    {% load static %}
+    <script src="{% static 'login/js/login.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'login/css/style.css' %}"> 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Login & Registration</title>
+
+</head>
+<body class="bg-dark text-light">
+    <div class="container ">
+        <div class="row m-4 pb-0 align-items-end">
+            <div class="col">
+                <h1>Welcome! Let's Travel!</h1>
+            </div>
+            <div class="col-3">
+            </div>
+        </div>
+        <hr class="bg-light">
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"
+            {% endif %}>{{ message }}</li>
+        {% endfor %}
+        </ul>
+        {% endif %}
+        <div class="row">
+            <div class="col mx-2">
+                <h1>Registration</h1>
+                <form action="{%url 'register'%}" method="post" id="regform">
+                {% csrf_token %}
+                    <div class="row">
+                        <div class="col-4">
+                            
+                            <label for="first_name" class="col col-form-label">First Name</label>
+                        </div>
+                        <div class="col-8">
+                            <input type="text" name="first_name"  id="first_name"  class="form-control"><br>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                                <label for="last_name" class="col col-form-label">Last Name</label>    
+                        </div>
+                        <div class="col-8">
+                            <input type="text" name="last_name" id="last_name"  class="form-control"><br>    
+                        </div> 
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <label for="email" class="col col-form-label">Email </label>
+                        </div>
+                        <div class="col-8">
+                            <div id="emailMsg"></div> 
+                            <input type="text" name="email" id="email" class="form-control "><br>
+                        </div> 
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <label for="birthday" class="col col-form-label">Birthday</label>
+                        </div>
+                        <div class="col-8">
+                            <input type="date" name="birthday" id="birthday" class="form-control"  onload=dateFunction()><br>
+                        </div> 
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <label for="password" class="col col-form-label">Password</label>
+                        </div>
+                        <div class="col-8">
+                            <input type="password" name="password" id="password" class="form-control"><br>
+                        </div> 
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <label for="password_c" class="col col-form-label">Confirm Password</label>   
+                        </div>
+                        <div class="col-8">
+                            <input type="password" name="password_c" id="password_c" class="form-control"><br>
+                        </div> 
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <label for="" class="col col-form-label"></label> 
+                        </div>
+                        <div class="col-8">
+                            <button class="btn btn-info">Register</button>
+                        </div> 
+                    </div> 
+                </form>
+            </div>
+
+            <div class="col">
+                <h1>Login</h1>
+                <form action="/validate_login" method="post">
+                {% csrf_token %}
+                    <div class="row">
+                        <div class="col-4">
+                            <label for="email_login">Email</label>
+                        </div>
+                        <div class="col-8">
+                            <input type="text" name="email_login" id="email_login" class="col form-control"><br>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <label for="password_login">Password</label>
+                        </div>
+                        <div class="col-8">
+                            <input type="password" name="password" id="password_login" class="col form-control">
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-4">
+                            <input type="checkbox" onclick="myFunction()">Show Password<br>
+                        </div>
+                        <div class="col-8">
+                            <button class="btn btn-info" >Log In</button>
+                        </div>
+                    </div>
+                
+                
+          
+                
+                
+               
+                </form>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
